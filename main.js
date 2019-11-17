@@ -218,14 +218,75 @@ console.log("class person:");
 const person3 = new PersonClass("two", "Vu", '11/05/2000');
 console.log(person2.firstName);
 console.log(person2.getBirthYear());
-*/
+
 
 
 // DOM Stuffs
-console.log(window);
-alert(1);
-// single element selectors
 
+// single element selectors
+const form = document.getElementById('my-form');
+console.log(form);
+console.log(document.querySelector('.container'));
+console.log(document.querySelectorAll('.item'));
+
+const items = document.querySelectorAll('.item');
+
+items.forEach((item) => console.log(item));
 
 // multiple element selectors
+
+
+const ul = document.querySelector('.items');
+
+// ul.remove();
+// ul.lastElementChild.remove();
+ul.firstElementChild.textContent= "hello";
+ul.children[1].innerText = 'An';
+// ul.lastElementChild.innerHTML = '<h1> Test 3rd H1 </h1>';
+
+const btns = document.querySelectorAll('.btn');
+btns.forEach((todo) => todo.style.background = 'red');
+
+const btn = document.querySelector('.btn');
+btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log("click");
+    console.log(e.target.className);
+    document.querySelector("#my-form").style.background = '#ccc';
+    // document.querySelector('body').classList.add('bg-dark');
+    document.querySelector('.items').lastElementChild.innerHTML = '<h1> Hello </h1>';
+})
+*/
+
+const myForm = document.querySelector('#my-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const msg = document.querySelector('.msg');
+const userList = document.querySelector('#users');
+
+myForm.addEventListener('submit', onSubmit);
+
+function onSubmit(e) {
+    e.preventDefault();
+    // console.log(nameInput.value);
+
+    if(nameInput.value === '' || emailInput.value === '') {
+        msg.innerHTML = 'Please enter all fields!';
+        msg.classList.add('error');
+        setTimeout(() => msg.remove(), 3000);
+    } else {
+        const li = document.createElement('li');
+        if (Math.random() > 0.5) {
+            li.appendChild(document.createTextNode(`${nameInput.value} <3 ${emailInput.value}`));
+        } else {
+            li.appendChild(document.createTextNode(`${nameInput.value} </3 ${emailInput.value}`));
+        }
+        
+        userList.appendChild(li);
+
+        nameInput.value = '';
+        emailInput.value = '';
+    }
+
+}
 
